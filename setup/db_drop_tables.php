@@ -10,12 +10,12 @@
 
 $table_list =
 [
-	1 =>
+	5 =>
 		[
 			"table" => "USERS",
 			"query" => "DROP TABLE USERS;"
 		],
-	2 =>
+	4 =>
 		[
 			"table" => "SONGS",
 			"query" => "DROP TABLE SONGS"
@@ -25,12 +25,12 @@ $table_list =
 			"table" => "RATING",
 			"query" => "DROP TABLE RATING"
 		],
-	4 =>
+	2 =>
 		[
 			"table" => "TOP_SONGS",
 			"query" => "DROP TABLE TOP_SONGS"
 		],
-	5 =>
+	1 =>
 		[
 			"table" => "RECENT_SONGS",
 			"query" => "DROP TABLE RECENT_SONGS"
@@ -56,7 +56,8 @@ $connection = mysqli_connect ("localhost",
 if (mysqli_connect_errno ())
 {
 	echo "ERROR: Database connection failure:\n"
-			. mysqli_connect_error ();
+			. mysqli_connect_error ()
+			. "\n";
 	exit (1);
 }
 
@@ -74,12 +75,12 @@ for ($i=1; $i<=5; $i++)
 		echo "ERROR: Cannot drop "
 				. $table_list[$i]["table"]
 				. " table:\n"
-				. mysqli_error ($connection);
+				. mysqli_error ($connection)
+				. "\n";
 	}
 }
 
 // Close the database connection.
 mysqli_close ($connection);
-echo "OK";
 
 ?>

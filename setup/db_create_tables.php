@@ -13,7 +13,7 @@ $table_list =
 [
 	1 =>
 		[
-			"table" => "USERS"
+			"table" => "USERS",
 			"query" => "
 				CREATE TABLE USERS
 				(
@@ -26,7 +26,7 @@ $table_list =
 		],
 	2 =>
 		[
-			"table" => "SONGS"
+			"table" => "SONGS",
 			"query" => "
 				CREATE TABLE SONGS
 				(
@@ -45,7 +45,7 @@ $table_list =
 		],
 	3 =>
 		[
-			"table" => "RATING"
+			"table" => "RATING",
 			"query" => "
 				CREATE TABLE RATING
 				(
@@ -58,8 +58,7 @@ $table_list =
 							FOREIGN KEY(song)
 							REFERENCES SONGS(id),
 					stars INT NOT NULL,
-					time DATETIME NOT NULL,
-					comment VARCHAR(256)
+					time DATETIME NOT NULL
 				)
 				"
 // id: Again, used to uniquely identify the rating if needed.
@@ -69,7 +68,7 @@ $table_list =
 		],
 	4 =>
 		[
-			"table" => "TOP_SONGS"
+			"table" => "TOP_SONGS",
 			"query" => "
 				CREATE TABLE TOP_SONGS
 				(
@@ -85,12 +84,12 @@ $table_list =
 		],
 	5 =>
 		[
-			"table" => "RECENT_SONGS"
+			"table" => "RECENT_SONGS",
 			"query" => "
 				CREATE TABLE RECENT_SONGS
 				(
 					id INT NOT NULL AUTO_INCREMENT,
-							PRIMARY KEY(number),
+							PRIMARY KEY(id),
 					song INT NOT NULL,
 							FOREIGN KEY(song)
 							REFERENCES SONGS(id),
@@ -122,7 +121,8 @@ $connection = mysqli_connect ("localhost",
 if (mysqli_connect_errno ())
 {
 	echo "ERROR: Database connection failure:\n"
-			. mysqli_connect_error ();
+			. mysqli_connect_error ()
+			. "\n";
 	exit (1);
 }
 
@@ -133,14 +133,16 @@ for ($i=1; $i<=5; $i++)
 	if (mysqli_query ($connection, $table_list[$i]["query"]))
 	{
 		echo $table_list[$i]["table"]
-				. " table created.";
+				. " table created.\n";
 	}
 	else
 	{
 		echo "ERROR: Failed to create "
 				. $table_list[$i]["table"]
 				. " table:\n"
-				. mysqli_error ($connection);
+				. mysqli_error ($connection)
+				. "\n"
+				. "Halting script.\n";
 		mysqli_close ($connection);
 		exit (1);
 	}
@@ -148,6 +150,6 @@ for ($i=1; $i<=5; $i++)
 
 // Close the database connection.
 mysqli_close ($connection);
-echo "OK";
+echo "OK\n";
 
 ?>
