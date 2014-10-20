@@ -40,10 +40,11 @@ Note this is a work in progress.
 		  the project root folder
 	(d) Modify database settings in "localconfig.ini".
 	(e) Create the tables.
-		- run "./setup/db_create_tables.php"
+		- run " php setup/db_create_tables.php"
 				(note) Can reset with db_drop_tables.php
 	(f) Populate the tables.
-		- TODO run "./setup/db_populate_tables.php"???
+		- TODO run "php setup/db_populate_tables.php"???
+		- (Need to actually create the file first.)
 
 (3) Setup the Cron Table
 	TODO
