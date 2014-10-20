@@ -1,19 +1,22 @@
 Note this is a work in progress.
 
 (1) Installing and Configuring Packages
-	(a)	Install the following.  I suggest following a LAMP/MAMP stack guide.
+	(a) Install the following.  I suggest following a LAMP/MAMP stack guide.
 		- apache2
 		- php
 		- mysql
-	(b) Install the following also.
+	(b) Point apache to the public folder.
+		- Set <DocRoot> to /var/radio/public or whever the site is hosted.
+		- Make sure to point to the public folder!
+	(c) Install the following also.
 		- icecast2
 		- ices2
-	(c) Change the icecast 2 configuration file (/etc/icecast2/icecast.xml).
+	(d) Change the icecast 2 configuration file (/etc/icecast2/icecast.xml).
 		- change the hostname to localhost
-	(d) Get an ices2 configuration file.
+	(e) Get an ices2 configuration file.
 		- download the zip from the website
 		- copy conf/ices-playlist.xml somewhere
-	(e) Make changes to the ices2 configuration file.
+	(f) Make changes to the ices2 configuration file.
 		- <background>1</background>
 		- Change metadata if you want to
 		- Change input block to:
