@@ -13,9 +13,9 @@ $table_list =
 [
 	1 =>
 		[
-			"table" => "USERS",
+			"table" => "USER",
 			"query" => "
-				CREATE TABLE USERS
+				CREATE TABLE USER
 				(
 					username VARCHAR(16) NOT NULL,
 							PRIMARY KEY(username),
@@ -26,9 +26,9 @@ $table_list =
 		],
 	2 =>
 		[
-			"table" => "SONGS",
+			"table" => "SONG",
 			"query" => "
-				CREATE TABLE SONGS
+				CREATE TABLE SONG
 				(
 					id INT NOT NULL AUTO_INCREMENT,
 							PRIMARY KEY(id),
@@ -68,9 +68,9 @@ $table_list =
 		],
 	4 =>
 		[
-			"table" => "TOP_SONGS",
+			"table" => "TOP_SONG",
 			"query" => "
-				CREATE TABLE TOP_SONGS
+				CREATE TABLE TOP_SONG
 				(
 					number INT NOT NULL,
 							PRIMARY KEY(number),
@@ -84,9 +84,9 @@ $table_list =
 		],
 	5 =>
 		[
-			"table" => "RECENT_SONGS",
+			"table" => "RECENT_SONG",
 			"query" => "
-				CREATE TABLE RECENT_SONGS
+				CREATE TABLE RECENT_SONG
 				(
 					id INT NOT NULL AUTO_INCREMENT,
 							PRIMARY KEY(id),
