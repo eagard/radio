@@ -1,0 +1,60 @@
+Note this is a work in progress.
+
+(1) Installing and Configuring Packages
+	(a)	Install the following.  I suggest following a LAMP/MAMP stack guide.
+		- apache2
+		- php
+		- mysql
+	(b) Install the following also.
+		- icecast2
+		- ices2
+	(c) Change the icecast 2 configuration file (/etc/icecast2/icecast.xml).
+		- change the hostname to localhost
+	(d) Get an ices2 configuration file.
+		- download the zip from the website
+		- copy conf/ices-playlist.xml somewhere
+	(e) Make changes to the ices2 configuration file.
+		- <background>1</background>
+		- Change metadata if you want to
+		- Change input block to:
+			<input>
+				<param name="type">script</param>
+				<param name="program">[NAME_OF_SCRIPT.PHP]</param>
+			</input>
+	 	- Change instance data
+			<instance>
+				<hostname>localhost</hostname>
+				<port>8000</port>
+				<password>[YOUR_ICECAST_SOURCE_PASSWORD]</password>
+				<mount>/stream.ogg</mount>
+				...
+
+(2) Configure the Database
+	(a) Ensure mysql is running.
+	(b) Create a database in mysql.
+	(c) Copy "setup/localconfig_template.ini" to "localconfig.ini".
+		- run "cp setup/localconfig_template.ini localconfig.ini" from
+		  the project root folder
+	(d) Modify database settings in "localconfig.ini".
+	(e) Create the tables.
+		- run "./setup/db_create_tables.php"
+				(note) Can reset with db_drop_tables.php
+	(f) Populate the tables.
+		- TODO run "./setup/db_populate_tables.php"???
+
+(3) Setup the Cron Table
+	TODO
+
+(?) Start the Environment
+	(a) Ensure the following processes are running.
+		- apache2
+		- mysql
+		- icecast2
+		- cron
+		(note) Can check icecast is properly connected by opening
+				"localhost:8000" in a web browser
+	(b) Start the ices2 process.
+		- run "ices2 [ICES_CONFIG_FILE.XML]"
+		- Check "localhost:8000/stream.ogg"
+	
+
