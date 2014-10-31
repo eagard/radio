@@ -25,8 +25,7 @@ $create_table_list =
 		"query" => "
 				CREATE TABLE USER
 				(
-					username VARCHAR(16) NOT NULL
-							ON DELETE CASCADE,
+					username VARCHAR(16) NOT NULL,
 					password VARCHAR(16) NOT NULL,
 					register_time DATETIME NOT NULL,
 					last_login DATETIME NOT NULL,
@@ -74,12 +73,13 @@ $create_table_list =
 		"query" => "
 				CREATE TABLE RATING
 				(
-					user VARCHAR(16) NOT NULL
-							FOREIGN KEY REFERENCES
-							USER(username),
-					song INT NOT NULL
-							FOREIGN KEY REFERENCES
-							SONG(id),
+					user VARCHAR(16) NOT NULL,
+					FOREIGN KEY (user)
+							REFERENCES USER(username)
+							ON DELETE CASCADE,
+					song INT NOT NULL,
+					FOREIGN KEY (song)
+							REFERENCES SONG(id),
 					stars INT NOT NULL,
 					last_update DATETIME NOT NULL,
 					PRIMARY KEY(user,song)
@@ -141,8 +141,8 @@ $populate_table_list =
 	[
 		"table" => "USER",
 		"query" => "INSERT INTO USER(username,password) VALUES
-				('eric','password')
-				('john','password')
+				('eric','password'),
+				('john','password'),
 				('ahmed','password');"
 	],
 	2 =>
@@ -159,22 +159,22 @@ $populate_table_list =
 	3 =>
 	[
 		"table" => "RATING",
-		"query" => "INSERT INTO RATING(user,song,stars,time) VALUES
-				('eric','song1',1,NOW())
-				('john','song2',4,NOW())
+		"query" => "INSERT INTO RATING(user,song,stars,last_update) VALUES
+				('eric','song1',1,NOW()),
+				('john','song2',4,NOW()),
 				('ahmed','song3',5,NOW());"
 	],
 	4 =>
 	[
-		"table" => "TOP_SONG"
+		"table" => "TOP_SONG",
 		"query" => ""
 	],
 	5 =>
 	[
-		"table" => "RECENT_SONG"
+		"table" => "RECENT_SONG",
 		"query" => ""
 	]
-];			
+];
 
 ////////////////////////////////////////////////////////////
 // CODE
@@ -204,19 +204,19 @@ for ($i=1; $i<=5; $i++)
 {
 	// Drop table if it exists.
 	mysqli_query ($connection, "DROP TABLE IF EXISTS "
-			. $table_list[$i]["table"]
+			. $create_table_list[$i]["table"]
 			. ";");
 	
 	// Create the table.
 	if (mysqli_query ($connection, $create_table_list[$i]["query"]))
 	{
-		echo $table_list[$i]["table"]
+		echo $create_table_list[$i]["table"]
 				. " table created.\n";
 	}
 	else
 	{
 		echo "ERROR: Failed to create "
-				. $table_list[$i]["table"]
+				. $create_table_list[$i]["table"]
 				. " table:\n"
 				. mysqli_error ($connection)
 				. "\n"
@@ -228,13 +228,13 @@ for ($i=1; $i<=5; $i++)
 	// Populate the table.
 	if (mysqli_query ($connection, $populate_table_list[$i]["query"]))
 	{
-		echo $table_list[$i]["table"]
+		echo $populate_table_list[$i]["table"]
 				. " table populated.\n";
 	}
 	else
 	{
 		echo "ERROR: Failed to populate "
-				. $table_list[$i]["table"]
+				. $populate_table_list[$i]["table"]
 				. " table:\n"
 				. mysqli_error ($connection)
 				. "\n"
