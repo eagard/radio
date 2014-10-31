@@ -4,13 +4,16 @@
 // It will also remove old tables if there are any already there.
 // Create the database and local config file first.
 
+// Only the song table *needs* to be populated.
+// The rest are populated for easier testing.
+
 ////////////////////////////////////////////////////////////
 // CREATE TABLE LIST
 // Here is where we define an array of queries,
 // so we can run it over a for loop later.
 ////////////////////////////////////////////////////////////
 
-$create_table_list =
+$table_list =
 [
 	// USER
 	// A user is a website user account.  A user account is only needed
@@ -22,7 +25,10 @@ $create_table_list =
 	1 =>
 	[
 		"table" => "USER",
-		"query" => "
+		"drop" => "
+				DROP TABLE IF EXISTS USER;
+				",
+		"create" => "
 				CREATE TABLE USER
 				(
 					username VARCHAR(16) NOT NULL,
@@ -30,7 +36,14 @@ $create_table_list =
 					register_time DATETIME NOT NULL,
 					last_login DATETIME NOT NULL,
 					PRIMARY KEY(username)
-				)
+				);
+				",
+		"populate" => "
+				INSERT INTO USER(username,password)
+				VALUES
+				('eric','password'),
+				('john','password'),
+				('ahmed','password');
 				"
 	],
 	// SONG
@@ -47,7 +60,10 @@ $create_table_list =
 	2 =>
 	[
 		"table" => "SONG",
-		"query" => "
+		"drop" => "
+				DROP TABLE IF EXISTS SONG;
+				",
+		"create" => "
 				CREATE TABLE SONG
 				(
 					id INT NOT NULL,
@@ -57,9 +73,15 @@ $create_table_list =
 					image_filename VARCHAR(32) NOT NULL,
 					PRIMARY KEY(id)
 				)
+				",
+		"populate" => "
+				INSERT INTO SONG
+				(id,title,artist,audio_filename,image_filename)
+				VALUES
+				(1,'song1','song1','song1.mp3','song1.png');
 				"
 	],
-	// RATING TODO REMOVE AUTOINCREMENT AND CHANGE POP TO REFLECT
+	// RATING
 	// Each user may rate a song between 1 and 5 stars.  A rating cannot be
 	// removed, but it can be overwritten.
 	//
@@ -70,7 +92,10 @@ $create_table_list =
 	3 =>
 	[
 		"table" => "RATING",
-		"query" => "
+		"drop" => "
+				DROP TABLE IF EXISTS RATING;
+				",
+		"create" => "
 				CREATE TABLE RATING
 				(
 					user VARCHAR(16) NOT NULL,
@@ -84,6 +109,13 @@ $create_table_list =
 					last_update DATETIME NOT NULL,
 					PRIMARY KEY(user,song)
 				)
+				",
+		"populate" => "
+				INSERT INTO RATING(user,song,stars,last_update)
+				VALUES
+				('eric','song1',1,NOW()),
+				('john','song2',4,NOW()),
+				('ahmed','song3',5,NOW());
 				"
 	],
 	// TOP_SONG
@@ -95,15 +127,21 @@ $create_table_list =
 	4 =>
 	[
 		"table" => "TOP_SONG",
-		"query" => "
+		"drop" => "
+				DROP TABLE IF EXISTS TOP_SONG;
+				",
+		"create" => "
 				CREATE TABLE TOP_SONG
 				(
 					number INT NOT NULL,		
 					song INT NOT NULL
-							FOREIGN KEY REFERENCES
-							SONG(id),
+							FOREIGN KEY (song)
+							REFERENCES SONG(id),
 					PRIMARY KEY(number)
 				)
+				",
+		"populate" => "
+				
 				"
 	],
 	// RECENT_SONG
@@ -115,66 +153,27 @@ $create_table_list =
 	5 =>
 	[
 		"table" => "RECENT_SONG",
-		"query" => "
+		"drop" => "
+				DROP TABLE IF EXISTS RECENT_SONG;
+				",
+		"create" => "
 				CREATE TABLE RECENT_SONG
 				(
 					id INT NOT NULL AUTO_INCREMENT,
-					song INT NOT NULL
-							FOREIGN KEY REFERENCES
-							SONG(id),
+					song INT NOT NULL,
+							FOREIGN KEY (song)
+							REFERENCES SONG(id),
 					time_played DATETIME NOT NULL,
 					PRIMARY KEY(id)
 				)
+				",
+		"populate" => "
+				
 				"
 	]
 ];
 
 
-////////////////////////////////////////////////////////////
-// POPULATE TABLE LIST
-// Prepopulate the table with data.
-////////////////////////////////////////////////////////////
-
-$populate_table_list =
-[
-	1 =>
-	[
-		"table" => "USER",
-		"query" => "INSERT INTO USER(username,password) VALUES
-				('eric','password'),
-				('john','password'),
-				('ahmed','password');"
-	],
-	2 =>
-	[
-		"table" => "SONG",
-		"query" => "INSERT INTO SONG
-				(id,title,artist,audio_filename,image_filename)
-				VALUES
-				(1,'song1','song1','song1.mp3','song1.png');"
-	],
-	// Note RATING, TOP_SONG, and RECENT_SONG tables are populated for
-	// test purposes.  This should not be required from algorithms, but
-	// improves development environment setup time.
-	3 =>
-	[
-		"table" => "RATING",
-		"query" => "INSERT INTO RATING(user,song,stars,last_update) VALUES
-				('eric','song1',1,NOW()),
-				('john','song2',4,NOW()),
-				('ahmed','song3',5,NOW());"
-	],
-	4 =>
-	[
-		"table" => "TOP_SONG",
-		"query" => ""
-	],
-	5 =>
-	[
-		"table" => "RECENT_SONG",
-		"query" => ""
-	]
-];
 
 ////////////////////////////////////////////////////////////
 // CODE
@@ -203,20 +202,18 @@ if (mysqli_connect_errno ())
 for ($i=1; $i<=5; $i++)
 {
 	// Drop table if it exists.
-	mysqli_query ($connection, "DROP TABLE IF EXISTS "
-			. $create_table_list[$i]["table"]
-			. ";");
+	mysqli_query ($connection, $table_list[$i]["drop"]);
 	
 	// Create the table.
-	if (mysqli_query ($connection, $create_table_list[$i]["query"]))
+	if (mysqli_query ($connection, $table_list[$i]["create"]))
 	{
-		echo $create_table_list[$i]["table"]
+		echo $table_list[$i]["table"]
 				. " table created.\n";
 	}
 	else
 	{
 		echo "ERROR: Failed to create "
-				. $create_table_list[$i]["table"]
+				. $table_list[$i]["table"]
 				. " table:\n"
 				. mysqli_error ($connection)
 				. "\n"
@@ -226,15 +223,15 @@ for ($i=1; $i<=5; $i++)
 	}
 	
 	// Populate the table.
-	if (mysqli_query ($connection, $populate_table_list[$i]["query"]))
+	if (mysqli_query ($connection, $table_list[$i]["populate"]))
 	{
-		echo $populate_table_list[$i]["table"]
+		echo $table_list[$i]["table"]
 				. " table populated.\n";
 	}
 	else
 	{
 		echo "ERROR: Failed to populate "
-				. $populate_table_list[$i]["table"]
+				. $table_list[$i]["table"]
 				. " table:\n"
 				. mysqli_error ($connection)
 				. "\n"
