@@ -13,6 +13,11 @@
 // so we can run it over a for loop later.
 ////////////////////////////////////////////////////////////
 
+// ChangeList
+//
+// Rank changed to be nullable attribute of song.
+// Therefore, removed the TOP_SONGS table.
+
 $table_list =
 [
 	// USER
@@ -57,6 +62,10 @@ $table_list =
 	// audio_filename: The song .ogg must be stored in 'radio/music'
 	// image_filename: The album art must be stored in 'radio/public/image'
 	// COMPOSER & PERFORMER?
+	//
+	// Notes
+	//   All music is creative commons (cc by sa) 2.0 or 2.5.
+	//   This should be noted on any page that lists music.
 	2 =>
 	[
 		"table" => "SONG",
@@ -68,17 +77,78 @@ $table_list =
 				(
 					id INT NOT NULL,
 					title VARCHAR(32) NOT NULL,
-					artist VARCHAR(32) NOT NULL,
-					audio_filename VARCHAR(32) NOT NULL,
-					image_filename VARCHAR(32) NOT NULL,
+					composer VARCHAR(32) NOT NULL,
+					performer VARCHAR(32) NOT NULL,
+					audio_filename VARCHAR(64) NOT NULL,
+					source VARCHAR(32) NOT NULL,
+					rank INT,
 					PRIMARY KEY(id)
 				)
 				",
 		"populate" => "
 				INSERT INTO SONG
-				(id,title,artist,audio_filename,image_filename)
+				(id,title,composer,performer,audio_filename,source)
 				VALUES
-				(1,'song1','song1','song1.mp3','song1.png');
+				(1,'Suite Espanola',
+				'Issac Albeniz','Gordon Rowland',
+				'Isaac_Albeniz_-_suite_espanola_op._47_-_leyenda.ogg',
+				'www.musopen.com'),
+				(2,'Bassoon Pieces',
+				'Carl Almenräder','Arthur Grossman',
+				'Carl_Almenrader_-_Bassoon_Pieces.ogg',
+				'www.ibiblio.org/pandora'),
+				(3,'Sonata in B Major',
+				'Carl Philipp Emanuel Bach','Alex Murray & Martha Goldstein',
+				'Carl_Philipp_Emanuel_Bach_-_Sonata_in_Bb_major.ogg',
+				'www.ibiblio.org/pandora'),
+				(4,'Prelude and Fugue in A Minor',
+				'Johann Sebastian Bach','Samuel Cormier-Iijima',
+				'Bach_Prelude_and_Fugue_in_A_Minor.ogg',
+				'www.jsbach.net'),
+				(5,'String Quartet 4 - Allegro 1',
+				'Gustavo Becerra-Schmidt','Phila. String Quartet',
+				'Becerra_string_quartet_4_-_1allegro.ogg',
+				'mit.edu'),
+				(6,'Kreutzer Sonana Presto',
+				'Ludwig van Beethoven','Carrie Rehkopf',
+				'Violinist_CARRIE_REHKOPF-BEETHOVEN_KREUTZER_SONATA_Presto.ogg',
+				'themichels.org/carrie'),
+				(7,'Sonata in B Minor',
+				'Michael Blavet','Alex Murray & Martha Goldstein',
+				'Michel_Blavet_-_Sonata_in_B_minor.ogg',
+				'www.ibiblio.org/pandora'),
+				(8,'Quintet No.3 in F Major - Movement 1',
+				'Giuseppe Cambini','Soni Ventorum Wind Quintet',
+				'Giovanni_Giuseppe_Cambini_-_Quintet_No._3_in_F_major_1.ogg',
+				'www.ibiblio.org/pandora'),
+				(9,'Quintet No.2 in D Minor - Movement 2',
+				'Giuseppe Cambini','Soni Ventorum Wind Quintet',
+				'Giovanni_Giuseppe_Cambini_-_Quintet_No._2_in_D_minor_3.ogg',
+				'www.ibiblio.org/pandora'),
+				(10,'Symphony No.9 in E Minor - From the New World',
+				'Antonin Dvorak','Skidmore College Orchestra',
+				'Antonin_Dvorak_-_symphony_no._9_in_e_minor.ogg'
+				'www.musopen.org'),
+				(11,'Toccata and Suite in A Minor',
+				'Johann Jakob Froberger','Sylvia Kind',
+				'Johann_Jakob_Froberger_-_Toccata_and_Suite_in_A_minor.ogg',
+				'www.ibiblio.org/pandora'),
+				(12,'Fantasy in E Minor',
+				'Johann Jakob Froberger','Martha Goldstein',
+				'Johann_Jakob_Froberger_-_Fantasy_-_e_minor.ogg'
+				'www.ibiblio.org/pandora'),
+				(13,'Suite i, no. 2 in F Major',
+				'George Frederic Handel','Ivan Ilić'
+				'George_Frideric_Handel_-_suite_no._2_in_f_major.ogg'
+				'www.musopen.com'),
+				(14,'Sonata in E Minor',
+				'George Frederic Handel','Al Goldstein & Martha Goldstein',
+				'Handel_-_Sonata_in_E_minor_-_Grave.ogg'
+				'www.ibiblio.org/pandora'),
+				(15,'Sonata for Bassoon with Piano Accompaniment',
+				'Comille Saint-Saens','Arthur Grossman & Joseph Levine',
+				'Camille_Saint-Saens_-_Sonata_for_bassoon_with_piano.ogg',
+				'www.ibiblio.org/pandora');
 				"
 	],
 	// RATING
@@ -113,35 +183,9 @@ $table_list =
 		"populate" => "
 				INSERT INTO RATING(user,song,stars,last_update)
 				VALUES
-				('eric','song1',1,NOW()),
-				('john','song2',4,NOW()),
-				('ahmed','song3',5,NOW());
-				"
-	],
-	// TOP_SONG
-	// The top X songs of the Y.
-	// X is a number (i.e. 10)
-	// Y is a time period (i.e. hour/day)
-	//
-	// number: the rating of the song, going from 1 (best) to X (least best)
-	4 =>
-	[
-		"table" => "TOP_SONG",
-		"drop" => "
-				DROP TABLE IF EXISTS TOP_SONG;
-				",
-		"create" => "
-				CREATE TABLE TOP_SONG
-				(
-					number INT NOT NULL,		
-					song INT NOT NULL
-							FOREIGN KEY (song)
-							REFERENCES SONG(id),
-					PRIMARY KEY(number)
-				)
-				",
-		"populate" => "
-				
+				('eric',1,1,NOW()),
+				('john',2',4,NOW()),
+				('ahmed','2',5,NOW());
 				"
 	],
 	// RECENT_SONG
@@ -150,7 +194,7 @@ $table_list =
 	// id: Increments, so the most recently played are the entries
 	//     with the five highest id's.
 	// time: This is the time the song started playing.
-	5 =>
+	4 =>
 	[
 		"table" => "RECENT_SONG",
 		"drop" => "
@@ -164,11 +208,13 @@ $table_list =
 							FOREIGN KEY (song)
 							REFERENCES SONG(id),
 					time_played DATETIME NOT NULL,
-					PRIMARY KEY(id)
+					PRIMARY KEY(song,time_played)
 				)
 				",
 		"populate" => "
-				
+				INSERT INTO RECENT_SONG(song,time_played)
+				VALUES
+				(1,NOW());
 				"
 	]
 ];
@@ -199,7 +245,7 @@ if (mysqli_connect_errno ())
 }
 
 
-for ($i=1; $i<=5; $i++)
+for ($i=1; $i<=4; $i++)
 {
 	// Drop table if it exists.
 	mysqli_query ($connection, $table_list[$i]["drop"]);
