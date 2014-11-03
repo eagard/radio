@@ -208,7 +208,7 @@ $table_list =
 							FOREIGN KEY (song)
 							REFERENCES SONG(id),
 					time_played DATETIME NOT NULL,
-					PRIMARY KEY(song,time_played)
+					PRIMARY KEY(id)
 				)
 				",
 		"populate" => "
