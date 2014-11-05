@@ -18,7 +18,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<div id="siteName">
-			Radio Site Name
+			WUMD Classic Radio Station
 			</div>
 			<div id="login">
 				<a href="">Login</a>
@@ -40,8 +40,7 @@
 		</div>
 		<div id="footer">
 			<span>Internet Radio Station | University Of Michigan - Dearborn</span>
-			<p>Copyright &copy; 2014. All Rights Reserved</p>
-
+			<p>Web Technology - Fall 2014</p>
 		</div>
 	</div>
 </div>
