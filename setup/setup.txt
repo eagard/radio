@@ -3,13 +3,13 @@ Note this is a work in progress.
 (1) Installing and Configuring Packages
 	(a) Install the following.  I suggest following a LAMP/MAMP stack guide.
 		- apache2
-		- php
+		- php (and any php stuff necessary for XAMP)
 		- mysql
 	(b) Point apache to the public folder.
-		- Set <DocRoot> to /var/radio/public or whever the site is hosted.
+		- Set <DocRoot> to /var/radio/public or wherever the site is hosted.
 		- Make sure to point to the public folder!
 	(c) Install the following also.
-		- icecast2
+		- icecast2 (write down the passwords it prompts you for)
 		- ices2
 	(d) Change the icecast 2 configuration file (/etc/icecast2/icecast.xml).
 		- change the hostname to localhost
@@ -39,12 +39,8 @@ Note this is a work in progress.
 		- run "cp setup/localconfig_template.ini localconfig.ini" from
 		  the project root folder
 	(d) Modify database settings in "localconfig.ini".
-	(e) Create the tables.
-		- run " php setup/db_create_tables.php"
-				(note) Can reset with db_drop_tables.php
-	(f) Populate the tables.
-		- TODO run "php setup/db_populate_tables.php"???
-		- (Need to actually create the file first.)
+	(e) Create & populate the tables.
+		- run "php setup/setup_db.php"
 
 (3) Setup the Cron Table
 	TODO
