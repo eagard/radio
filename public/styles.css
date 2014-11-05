@@ -1,0 +1,87 @@
+/*	
+	John Battaglia
+	Eric Gardner
+	Ahmed Altai
+	CIS 435 - Fall 2014
+	Term Project
+	File: styles.css
+								*/
+
+
+#body {
+	background-color: teal;
+}
+
+#wrapper {
+	margin-left : 10%;
+	margin-right : 10%;
+	background-color: #d0e4fe;
+}
+
+#header {
+	width: auto;
+	height: 100px;
+    
+}
+
+#nav {
+	width: auto;
+    height: 35px;
+    font-size: 16px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 3px 2px 3px #333333;
+    background-color: #8AD9FF;
+    border-radius: 8px;
+}
+
+#nav ul {
+    height: auto;
+    padding: 8px 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+#nav li { 
+	display: inline; 
+	padding: 20px; 
+}
+
+#nav a {
+    text-decoration: none;
+    color: #00F;
+    padding: 8px 8px 8px 8px;
+}
+
+#nav a:hover {
+    color: #F90;
+    background-color: #FFF;
+}
+
+#section {
+	height: 1000px;
+}
+
+#footer {
+	text-align: center;
+	color: yellow;
+    background-color: #333;
+    width: 100%;
+    bottom: 0;
+    position: relative;
+}
+
+#login {
+	float: right;
+}
+
+#live {
+	
+}
+
+
+#siteName {
+	float: left;
+	font-size: 30px;
+}
