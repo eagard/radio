@@ -20,6 +20,12 @@
 		?>
 		<div id="section">
 			<h1>Register Page</h1>
+
+
+
+
+
+
 		</div>
 		<?php
 			include 'includes/footer.php';
