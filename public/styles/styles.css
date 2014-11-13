@@ -8,6 +8,35 @@
 								*/
 
 
+
+#container {
+    min-height: 500px;
+    border-radius: 5px 5px 0 0;
+}
+
+.widget {
+    margin-bottom: 20px;
+}
+
+.widget h2 {
+    margin:0 0 10px 0;
+    padding: 0 5px;
+    font-weight:normal;
+    border-bottom: 1px solid #ddd;
+}
+
+.widget .inner {
+    margin:0 10px;
+}
+
+aside {
+
+    width:260px;
+    float:right;
+    border-left: 1px dashed #aaa;
+    padding-left: 15px;
+}
+
 #body {
 	background-color: white;
 	border-width: 2px;
