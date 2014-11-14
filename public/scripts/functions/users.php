@@ -10,7 +10,7 @@ function userExists($username) {
 
 	$username = sanitize($username);
 
-	$query = mysql_query("SELECT COUNT(`userID`) FROM `users` WHERE `username` = '$username'");
+	$query = mysql_query("SELECT COUNT(`userID`) FROM `USER` WHERE `username` = '$username'");
 
 	return (mysql_result($query, 0) == 1) ? true : false;
 
@@ -20,7 +20,7 @@ function userActive($username) {
 
 	$username = sanitize($username);
 
-	$query = mysql_query("SELECT COUNT(`userID`) FROM `users` WHERE `username` = '$username' AND `active` = 1");
+	$query = mysql_query("SELECT COUNT(`userID`) FROM `USER` WHERE `username` = '$username' AND `active` = 1");
 
 	return (mysql_result($query, 0) == 1) ? true : false;
 
@@ -28,13 +28,13 @@ function userActive($username) {
 
 function userIDFromUsername($username) {
 	$username = sanitize($username);
-	return mysql_result(mysql_query("SELECT `userID` FROM `users` WHERE `userName` = '$username'"), 0, 'userID');
+	return mysql_result(mysql_query("SELECT `userID` FROM `USER` WHERE `username` = '$username'"), 0, 'userID');
 }
 
 function login($username, $password) {
 	$userID = userIDFromUsername($username);
 	$username = sanitize($username);
-	return (mysql_result(mysql_query("SELECT COUNT(`userID`) FROM `users` WHERE `userName` = '$username' AND `password` = '$password'"), 0) == 1) ? $userID : false;
+	return (mysql_result(mysql_query("SELECT COUNT(`userID`) FROM `USER` WHERE `username` = '$username' AND `password` = '$password'"), 0) == 1) ? $userID : false;
 }
 
 ?>

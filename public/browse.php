@@ -5,7 +5,7 @@
 		Ahmed Altai
 		CIS 435 - Fall 2014
 		Term Project
-		File: index.php
+		File: browse.php
 							-->
 <html>
 <?php
@@ -22,10 +22,9 @@
 		<div id="section">
 			<h1>Here are the recent songs</h1>
 			
-
-
-
-
+			<?php
+				include 'scripts/database/browseSongs.php';
+			?>
 		</div>
 		<?php
 			include 'includes/footer.php';
