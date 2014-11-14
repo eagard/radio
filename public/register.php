@@ -9,6 +9,7 @@
 							-->
 <html>
 <?php
+	include 'scripts/init.php';
 	include 'includes/head.php';
 ?>
 <body>
