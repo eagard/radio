@@ -6,7 +6,15 @@
 	<div id="container">
 		<aside>
 			<?php
-				include 'login.php';
+
+			if(loggedIn() === true) {
+				echo 'Logged In';
+			}
+			else {
+				include 'loginReg.php';
+			}
+
+				
 			?>
 		</aside>
 	</div>

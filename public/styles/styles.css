@@ -54,7 +54,7 @@ aside {
 
 #header {
 	width: auto;
-	height: 100px;
+	height: 200px;
 	font-family: Tahoma, Geneva, sans-serif;
 	background-color: #white;
     border-radius: 8px;
@@ -117,12 +117,8 @@ aside {
     border-width: 2px;
 }
 
-#login {
-	float: right;
-}
-
-#live {
-	
+#login li.link {
+	margin-top: 5px;
 }
 
 #siteName {

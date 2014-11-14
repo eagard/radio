@@ -21,6 +21,18 @@
 		?>
 		<div id="section">
 			<h1>HomePage</h1>
+
+			<?php
+			
+				if(isset($_SESSION['userID'])) {
+					echo "Logged in";
+				}
+				else {
+					echo "Not logged in";
+				}
+
+			?>
+
 		</div>
 		<?php
 			include 'includes/footer.php';
