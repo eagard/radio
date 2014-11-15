@@ -1,7 +1,7 @@
 <?php
 
 include 'scripts/init.php';
-//include 'includes/header.php'
+
 
 
 
@@ -25,7 +25,7 @@ if(empty($_POST) === false) {
 			$errors[] = 'That username/password combo is incorrect silly';
 		}
 		else {
-			$_SESSION['userID'] = $login;
+			$_SESSION['username'] = $login;
 			header('Location: index.php');
 			exit();
 		}
@@ -33,7 +33,7 @@ if(empty($_POST) === false) {
 
 	print_r($errors);
 
-//include 'includes/footer.php';
+
 
 }
 

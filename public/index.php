@@ -24,7 +24,7 @@
 
 			<?php
 			
-				if(isset($_SESSION['userID'])) {
+				if(isset($_SESSION['username'])) {
 					echo "Logged in";
 				}
 				else {
