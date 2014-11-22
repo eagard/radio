@@ -8,13 +8,11 @@
 			<?php
 
 			if(loggedIn() === true) {
-				echo 'Logged In';
+				echo "<a href='logout.php'>Log out</a>";
 			}
 			else {
 				include 'loginReg.php';
 			}
-
-				
 			?>
 		</aside>
 	</div>
