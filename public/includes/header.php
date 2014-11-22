@@ -11,7 +11,9 @@
 				echo "<a href='logout.php'>Log out</a>";
 			}
 			else {
-				include 'loginReg.php';
+				echo "<a href='login.php'>Log in</a>";
+				echo " | ";
+				echo "<a href='register.php'>Register</a>";
 			}
 			?>
 		</aside>

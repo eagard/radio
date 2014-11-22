@@ -1,3 +1,7 @@
+<?php
+	include 'scripts/init.php';
+	include 'includes/head.php';
+?>
 <!DOCTYPE html>
 
 <!-- 	John Battaglia
@@ -8,10 +12,7 @@
 		File: index.php
 							-->
 <html>
-<?php
-	include 'scripts/init.php';
-	include 'includes/head.php';
-?>
+
 <body>
 <div id="body">
 	<div id="wrapper">
@@ -24,6 +25,7 @@
 
 			<?php
 			
+				
 				if(isset($_SESSION['username'])) {
 					echo "Logged in";
 				}

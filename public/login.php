@@ -1,3 +1,7 @@
+<?php 
+	include 'scripts/init.php';
+	include 'includes/head.php';
+?>
 <!DOCTYPE html>
 
 <!-- 	John Battaglia
@@ -8,57 +12,67 @@
 		File: login.php
 							-->
 <html> 
-<?php 
-	include 'scripts/init.php';
-	include 'includes/head.php';
-?>
+
 <body>
 <div id="body">
 	<div id="wrapper">
 		<?php
 			include 'includes/header.php';
 			include 'includes/nav.php';
+
+
+			if(empty($_POST) === false) {
+
+				$username = $_POST['username'];
+				$password = $_POST['password'];
+
+				if(empty($username) === true || empty($password) === true) {
+					$errors[] = 'Username or password failed';
+				}
+				else if (userExists($username) === false) {
+					$errors[] = 'That username does not exist at all, ever';
+				}
+				else if (userActive($username) === false) {
+					$errors[] = 'User account is not activated';
+				}
+				else { //sucess
+					$login = login($username, $password);
+					if($login === false) {
+						$errors[] = 'That username/password combo is incorrect silly';
+					}
+					else {
+						$_SESSION['username'] = $login; //set username
+						header('Location: index.php');
+						exit();
+					}
+				}
+
+				if(count($errors) > 0){
+					echo outputErrors($errors);
+				}
+				
+			}
+
+		
 		?>
 		<div id="section">
-			<h1>Login status</h1>
-			<?php
-	if(empty($_POST) === false) {
+			<form action="" method="post">
+			<ul id="login">
+				<li>
+					Username:<br>
+					<input type="text" name="username">
+				</li>
+				<li>
+					Password:<br>
+					<input type="password" name="password">
+				</li>
+				<li>
+					<input type="submit" value="Log in">
+				</li>
+			</ul>
+			</form>
 
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-
-		if(empty($username) === true || empty($username) === true) {
-			$errors[] = 'Username or password failed';
-		}
-		else if (userExists($username) === false) {
-			$errors[] = 'That username does not exist at all, ever';
-		}
-		else if (userActive($username) === false) {
-			$errors[] = 'User account is not activated';
-		}
-		else {
-			$login = login($username, $password);
-			if($login === false) {
-				$errors[] = 'That username/password combo is incorrect silly';
-			}
-			else {
-				$_SESSION['username'] = $login;
-
-				header('Location: index.php');
-				exit();
-			}
-		}
-
-	print_r($errors);
-
-
-
-}
-
-
-
-
-?>
+			
 
 
 

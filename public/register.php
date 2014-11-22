@@ -18,6 +18,7 @@
 		<?php
 			include 'includes/header.php';
 			include 'includes/nav.php';
+			
 			if(empty($_POST) === false) {
 				if( (empty($_POST['username']) === true) ) {
 					$errors[] = 'Must fill in all fields';
