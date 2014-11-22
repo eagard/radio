@@ -1,26 +1,5 @@
 <?php 
-	include 'scripts/init.php';
-	include 'includes/head.php';
-?>
-<!DOCTYPE html>
-
-<!-- 	John Battaglia
-		Eric Gardner
-		Ahmed Altai
-		CIS 435 - Fall 2014
-		Term Project
-		File: login.php
-							-->
-<html> 
-
-<body>
-<div id="body">
-	<div id="wrapper">
-		<?php
-			include 'includes/header.php';
-			include 'includes/nav.php';
-
-
+include 'scripts/init.php';
 			if(empty($_POST) === false) {
 
 				$username = $_POST['username'];
@@ -52,8 +31,30 @@
 				}
 				
 			}
+			?>
 
-		
+<?php 
+	
+?>
+<!DOCTYPE html>
+
+<!-- 	John Battaglia
+		Eric Gardner
+		Ahmed Altai
+		CIS 435 - Fall 2014
+		Term Project
+		File: login.php
+							-->
+<html> 
+<?php
+	include 'includes/head.php';
+?>
+<body>
+<div id="body">
+	<div id="wrapper">
+		<?php
+			include 'includes/header.php';
+			include 'includes/nav.php';
 		?>
 		<div id="section">
 			<form action="" method="post">
