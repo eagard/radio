@@ -1,41 +1,36 @@
 <?php 
 include 'scripts/init.php';
-			if(empty($_POST) === false) {
 
-				$username = $_POST['username'];
-				$password = $_POST['password'];
+if(empty($_POST) === false) {
 
-				if(empty($username) === true || empty($password) === true) {
-					$errors[] = 'Username or password failed';
-				}
-				else if (userExists($username) === false) {
-					$errors[] = 'That username does not exist at all, ever';
-				}
-				else if (userActive($username) === false) {
-					$errors[] = 'User account is not activated';
-				}
-				else { //sucess
-					$login = login($username, $password);
-					if($login === false) {
-						$errors[] = 'That username/password combo is incorrect silly';
-					}
-					else {
-						$_SESSION['username'] = $login; //set username
-						header('Location: index.php');
-						exit();
-					}
-				}
+	$username = $_POST['username'];
+	$password = $_POST['password'];
 
-				if(count($errors) > 0){
-					echo outputErrors($errors);
-				}
-				
+	if(empty($username) === true || empty($password) === true) {
+		$errors[] = 'Username or password failed';
+	}
+	else if (userExists($username) === false) {
+		$errors[] = 'That username does not exist at all, ever';
+	}
+	else if (userActive($username) === false) {
+		$errors[] = 'User account is not activated';
+	}
+	else { //sucess
+		$login = login($username, $password);
+			if($login === false) {
+				$errors[] = 'That username/password combo is incorrect silly';
 			}
-			?>
+			else {
+				$_SESSION['username'] = $login; //set username
+				header('Location: index.php');
+				exit();
+			}
+	}
 
-<?php 
-	
+				
+}
 ?>
+
 <!DOCTYPE html>
 
 <!-- 	John Battaglia
@@ -73,14 +68,17 @@ include 'scripts/init.php';
 			</ul>
 			</form>
 
-			
+			<?php
 
+			if(count($errors) > 0){
+				echo outputErrors($errors);
+			}
 
+			?>
 
 		</div>
 		<?php
 			include 'includes/footer.php';
-
 		?>
 	</div>
 </div>

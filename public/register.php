@@ -1,3 +1,34 @@
+<?php
+include 'scripts/init.php';
+		if(empty($_POST) === false) {
+
+				$user = $_POST['username'];
+				$pass = $_POST['password'];
+				$passAgain = $_POST['passwordAgain'];
+
+
+				if( (empty($user) === true) || (empty($pass) === true) || (empty($passAgain) === true)) {
+					$errors[] = 'Must fill in all fields';
+				} 
+				else if (!($pass === $passAgain)) {
+					$errors[] = 'Passwords must match.';
+				}
+				else if ( (strlen($pass) < 2) || (strlen($pass) > 16) ) {
+					$errors[] = 'Passwords must be between 2 and 16 characters';
+				}
+				
+				
+				if (empty($errors)) {
+					createUser($user, $pass);
+					header('Location: index.php');
+					exit();
+				}
+
+				print_r($errors);
+			}
+
+
+?>
 <!DOCTYPE html>
 
 <!-- 	John Battaglia
@@ -9,7 +40,6 @@
 							-->
 <html>
 <?php
-	include 'scripts/init.php';
 	include 'includes/head.php';
 ?>
 <body>
@@ -18,20 +48,15 @@
 		<?php
 			include 'includes/header.php';
 			include 'includes/nav.php';
-			
-			if(empty($_POST) === false) {
-				if( (empty($_POST['username']) === true) ) {
-					$errors[] = 'Must fill in all fields';
-				}
 
-				print_r($errors);
-			}
+
+
+			
 			
 
 		?>
 		<div id="section">
 			<h1>Registration Page</h1>
-			
 				<form action="" method="post">
 					<li>
 						Username*:<br>
