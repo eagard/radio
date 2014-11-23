@@ -1,3 +1,7 @@
+<?php
+	include 'scripts/init.php';
+?>
+
 <!DOCTYPE html>
 
 <!-- 	John Battaglia
@@ -9,7 +13,6 @@
 							-->
 <html>
 <?php
-	include 'scripts/init.php';
 	include 'includes/head.php';
 ?>
 <body>
@@ -21,11 +24,9 @@
 		?>
 		<div id="section">
 			<h1>Here are the recent songs</h1>
-			
-
-
-
-
+			<?php
+				include 'scripts/database/recentSongs.php';
+			?>
 		</div>
 		<?php
 			include 'includes/footer.php';
