@@ -13,7 +13,7 @@ if(empty($_POST) === false) {
 		$errors[] = 'That username does not exist at all, ever';
 	}
 	else if (userActive($username) === false) {
-		$errors[] = 'User account is not activated';
+		$errors[] = 'User account is already signed in';
 	}
 	else { //sucess
 		$login = login($username, $password);
@@ -22,6 +22,7 @@ if(empty($_POST) === false) {
 			}
 			else {
 				$_SESSION['username'] = $login; //set username
+				activeAccount($_SESSION['username']);
 				header('Location: index.php');
 				exit();
 			}
