@@ -7,33 +7,26 @@
 	File: styles.css
 								*/
 
-
-
-#container {
-    min-height: 500px;
-    border-radius: 5px 5px 0 0;
+#header {
+    width: auto;
+    height: 75px;
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: #white;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
 }
 
-.widget {
-    margin-bottom: 20px;
-}
-
-.widget h2 {
-    margin:0 0 10px 0;
-    padding: 0 5px;
-    font-weight:normal;
-    border-bottom: 1px solid #ddd;
-}
-
-.widget .inner {
-    margin:0 10px;
-}
-
-aside {
-    width:260px;
+#logInOut {
+    width:120px;
     float:right;
     border-left: 1px dashed #aaa;
     padding-left: 15px;
+}
+
+#siteName {
+    float:left;
+    font-size: 32px;
 }
 
 #body {
@@ -48,16 +41,6 @@ aside {
 	background-color: #white;
     border-width: 2px;
     border-radius: 8px;
-}
-
-#header {
-	width: auto;
-	height: 200px;
-	font-family: Tahoma, Geneva, sans-serif;
-	background-color: #white;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 2px;
 }
 
 #nav {
@@ -102,8 +85,6 @@ aside {
 	border-radius: 8px;
     border-style: solid;
     border-width: 2px;
-
-
 }
 
 #footer {
@@ -121,7 +102,3 @@ aside {
 	margin-top: 5px;
 }
 
-#siteName {
-	float: left;
-	font-size: 32px;
-}

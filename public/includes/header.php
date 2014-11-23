@@ -2,9 +2,8 @@
 	<div id="siteName">
 		WUMD Classic Radio Station <br>
 	</div>
-
-	<div id="container">
-		<aside>
+		<div id="logInOut">
+	
 			<?php
 
 			if(loggedIn() === true) {
@@ -16,6 +15,6 @@
 				echo "<a href='register.php'>Register</a>";
 			}
 			?>
-		</aside>
-	</div>
+
+		</div>
 </div>
