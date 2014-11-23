@@ -5,23 +5,21 @@ function loggedIn() {
 }
 
 function userExists($username) {
-
 	$username = sanitize($username);
-
 	$query = mysql_query("SELECT COUNT(*) FROM `USER` WHERE `username` = '$username'");
-
 	return (mysql_result($query, 0) == 1) ? true : false;
-
 }
 
 function userActive($username) {
-
 	$username = sanitize($username);
-
 	$query = mysql_query("SELECT COUNT(*) FROM `USER` WHERE `username` = '$username' AND `active` = 0");
-
 	return (mysql_result($query, 0) == 1) ? true : false;
+}
 
+function usersActive() {
+	$query = "SELECT COUNT(*) FROM `USER` WHERE `active` = 1 ";
+	$numActive = mysql_query($query);
+	return (mysql_result($numActive,0));
 }
 
 function login($username, $password) {
@@ -69,6 +67,5 @@ function updateLastLogin($username) {
 		return false;
 	}
 }
-
 
 ?>

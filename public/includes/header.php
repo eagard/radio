@@ -15,16 +15,19 @@
 				echo "<a href='register.php'>Register</a>";
 			}
 			?>
-
 		</div>
-		
+
 		<div id="systemInfo">
 			<?php
 			if(loggedIn() === true) {
 				echo "Hello, " . $_SESSION['username'] . "<br>";
-				echo "there are 2 people online";
+				if(usersActive() == 1){
+					echo "you are the only user logged in.";
+				}
+				else {
+					echo "there are " . usersActive() ." users logged in.";
+				}
 			}
-			
 			?>
 		</div>
 </div>
