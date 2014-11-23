@@ -21,7 +21,6 @@
 		?>
 		<div id="section">
 			<h1>Here is our collection of songs:</h1>
-			
 			<?php
 				include 'scripts/database/browseSongs.php';
 			?>

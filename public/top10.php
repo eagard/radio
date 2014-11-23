@@ -1,3 +1,7 @@
+<?php
+	include 'scripts/init.php';
+?>
+
 <!DOCTYPE html>
 
 <!-- 	John Battaglia
@@ -9,7 +13,6 @@
 							-->
 <html>
 <?php
-	include 'scripts/init.php';
 	include 'includes/head.php';
 ?>
 <body>
@@ -20,7 +23,10 @@
 			include 'includes/nav.php';
 		?>
 		<div id="section">
-			<h1>Top 10 Songs</h1>
+			<h1>Here are the top 10 songs: </h1>
+			<?php
+				include 'scripts/database/top10.php';
+			?>
 		</div>
 		<?php
 			include 'includes/footer.php';
