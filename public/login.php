@@ -12,9 +12,6 @@ if(empty($_POST) === false) {
 	else if (userExists($username) === false) {
 		$errors[] = 'That username does not exist at all, ever';
 	}
-	else if (userActive($username) === false) {
-		$errors[] = 'User account is already signed in';
-	}
 	else { //sucess
 		$login = login($username, $password);
 			if($login === false) {

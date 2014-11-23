@@ -9,5 +9,4 @@ function outputErrors($errors) {
 }
 
 
-
 ?>

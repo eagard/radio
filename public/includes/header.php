@@ -17,4 +17,14 @@
 			?>
 
 		</div>
+		
+		<div id="systemInfo">
+			<?php
+			if(loggedIn() === true) {
+				echo "Hello, " . $_SESSION['username'] . "<br>";
+				echo "there are 2 people online";
+			}
+			
+			?>
+		</div>
 </div>
