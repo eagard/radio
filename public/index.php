@@ -1,6 +1,5 @@
 <?php
 	include 'scripts/init.php';
-	include 'includes/head.php';
 ?>
 <!DOCTYPE html>
 
@@ -12,7 +11,9 @@
 		File: index.php
 							-->
 <html>
-
+<?php
+	include 'includes/head.php';
+?>
 <body>
 <div id="body">
 	<div id="wrapper">

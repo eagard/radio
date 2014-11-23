@@ -23,6 +23,7 @@ if(empty($_POST) === false) {
 			else {
 				$_SESSION['username'] = $login; //set username
 				activeAccount($_SESSION['username']);
+				updateLastLogin($_SESSION['username']);
 				header('Location: index.php');
 				exit();
 			}

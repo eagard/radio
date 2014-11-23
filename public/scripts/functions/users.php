@@ -58,5 +58,17 @@ function deactivateAccount($username) {
 	}
 }
 
+function updateLastLogin($username) {
+	$datetime = date('Y-m-d H:i:s');
+	$query = "UPDATE `USER` SET last_login='$datetime' WHERE username = '$username'";
+	if(userExists($username)){
+		mysql_query($query);
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 
 ?>

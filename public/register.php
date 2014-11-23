@@ -22,6 +22,7 @@ include 'scripts/init.php';
 		
 		if (empty($errors)) {
 			createUser($user, $pass);
+			
 			header('Location: index.php');
 			exit();
 		}		
