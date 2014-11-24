@@ -134,6 +134,10 @@ $result = mysqli_query ($connection, $query);
 $row = mysqli_fetch_row ($result);
 $file_name = $row[0];
 
+// Write song choice to database.
+$query = "INSERT INTO RECENT_SONG(song,time_played) VALUES (".$selection.",NOW());";
+mysqli_query ($connection, $query);
+
 // Echo filename to stdout for stream client to read.
 print ($file_path . "/music/" . $file_name . "\n");
 
