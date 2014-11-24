@@ -6,7 +6,7 @@
 
 
 // Retrieve local database configuration settings.
-$localconfig = parse_ini_file ("../../localconfig.ini", true);
+$localconfig = parse_ini_file ("../localconfig.ini", true);
 
 $dbname = $localconfig["database"]["dbname"];
 $dbuser = $localconfig["database"]["dbuser"];
