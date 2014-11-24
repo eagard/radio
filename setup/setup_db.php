@@ -35,15 +35,16 @@ $table_list =
 					password VARCHAR(16) NOT NULL,
 					register_time DATETIME NOT NULL,
 					last_login DATETIME NOT NULL,
+					active INT NOT NULL,
 					PRIMARY KEY(username)
 				);
 				",
 		"populate" => "
-				INSERT INTO USER(username,password,register_time,last_login)
+				INSERT INTO USER(username,password,register_time,last_login,active)
 				VALUES
-				('eric','password',NOW(),NOW()),
-				('john','password',NOW(),NOW()),
-				('ahmed','password',NOW(),NOW());
+				('eric','password',NOW(),NOW(),0),
+				('john','password',NOW(),NOW(),0),
+				('ahmed','password',NOW(),NOW(),0);
 				"
 	],
 	// SONG
