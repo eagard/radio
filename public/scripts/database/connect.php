@@ -7,16 +7,23 @@
 		File: connect.php
 							*/
 
+// Error messages.
 $conn_error = 'There has been a problem connecting...';
 $db_error = 'That Database doesnt exist...';
 
-$mysql_host = 'localhost';
-$mysql_user = 'root';
-$mysql_pass = 'root';
-$mysql_db = 'radio'; //database to connect to
+// Retrieve local configuration settings.
+$localconfig = parse_ini_file ("../../../localconfig.ini", true);
+$dbname = $localconfig["database"]["dbname"];
+$dbuser = $localconfig["database"]["dbuser"];
+$dbpass = $localconfig["database"]["dbpass"];
 
-@mysql_connect($mysql_host, $mysql_user, $mysql_pass) or die($conn_error);
-@mysql_select_db($mysql_db) or die($db_error);
+//$mysql_host = 'localhost';
+//$mysql_user = 'root';
+//$mysql_pass = 'root';
+//$mysql_db = 'radio'; //database to connect to
+
+@mysql_connect("localhost", $dbuser, $dbpass) or die($conn_error);
+@mysql_select_db($dbname) or die($db_error);
 
 
 ?>
