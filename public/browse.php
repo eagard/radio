@@ -20,10 +20,10 @@
 			include 'includes/nav.php';
 		?>
 		<div id="section">
-			<h1>Here is our collection of songs:</h1>
 			<?php
 				include 'scripts/database/browseSongs.php';
 			?>
+			<p> All music is creative commons (cc-by-sa) 2.0 or 2.5. </p>
 		</div>
 		<?php
 			include 'includes/footer.php';

@@ -72,9 +72,9 @@ $table_list =
 				CREATE TABLE SONG
 				(
 					id INT NOT NULL,
-					title VARCHAR(32) NOT NULL,
-					composer VARCHAR(32) NOT NULL,
-					performer VARCHAR(32) NOT NULL,
+					title VARCHAR(64) NOT NULL,
+					composer VARCHAR(64) NOT NULL,
+					performer VARCHAR(64) NOT NULL,
 					audio_filename VARCHAR(64) NOT NULL,
 					source VARCHAR(32) NOT NULL,
 					rank INT,
