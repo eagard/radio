@@ -12,7 +12,7 @@ $conn_error = 'There has been a problem connecting...';
 $db_error = 'That Database doesnt exist...';
 
 // Retrieve local configuration settings.
-$localconfig = parse_ini_file ("../../../localconfig.ini", true);
+$localconfig = parse_ini_file ("../localconfig.ini", true);
 $dbname = $localconfig["database"]["dbname"];
 $dbuser = $localconfig["database"]["dbuser"];
 $dbpass = $localconfig["database"]["dbpass"];
