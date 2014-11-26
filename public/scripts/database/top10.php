@@ -12,7 +12,7 @@
 <?php
 
 // build SELECT query
-$query = "SELECT * FROM `RATING`,`SONG` WHERE SONG.id = RATING.song ORDER BY stars DESC LIMIT 10"; 
+$query = "SELECT * FROM `SONG` WHERE SONG.rank IS NOT NULL ORDER BY SONG.rank "; 
 
 if($query_run = mysql_query($query)) {
 	while($query_row = mysql_fetch_assoc($query_run)) {
