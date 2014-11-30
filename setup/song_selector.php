@@ -6,7 +6,7 @@
 
 
 // Retrieve local database configuration settings.
-$localconfig = parse_ini_file ("../localconfig.ini", true);
+$localconfig = parse_ini_file (dirname(dirname(__FILE__))."/localconfig.ini", true);
 
 $dbname = $localconfig["database"]["dbname"];
 $dbuser = $localconfig["database"]["dbuser"];
@@ -20,6 +20,9 @@ if (mysqli_connect_errno ())
 	echo "ERROR: Database connection failure:\n"
 			. mysqli_connect_error ()
 			. "\n";
+	echo "dbname=".$dbname."\n";
+	echo "dbuser=".$dbuser."\n";
+	echo "pwd=".getcwd()."\n";
 	exit (1);
 }
 
