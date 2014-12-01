@@ -90,6 +90,7 @@ tr:nth-child(even)
 {
     text-align: center;
     background: white;
+    padding: 5px;
     position: relative;
     border-color: blue;
     border-style: solid;

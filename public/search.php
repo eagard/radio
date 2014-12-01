@@ -23,7 +23,7 @@
 			include 'includes/nav.php';
 		?>
 		<div id="section">
-			<h1>Search music</h1>
+			<i>Search</i><br/><br/>
 			<form action="" method="post">
 			<ul>Search: <input type="text" name="searchTerm"><br></ul>
 			<ul><input type="submit" value="Submit"></ul>

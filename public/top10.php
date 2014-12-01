@@ -23,10 +23,11 @@
 			include 'includes/nav.php';
 		?>
 		<div id="section">
-			<h1>Here are the top 10 songs: </h1>
+			<i>Top Ten</i><br/><br/>
 			<?php
 				include 'scripts/database/top10.php';
 			?>
+			<p> All music is creative commons (cc-by-sa) 2.0 or 2.5. </p>
 		</div>
 		<?php
 			include 'includes/footer.php';

@@ -20,6 +20,7 @@
 			include 'includes/nav.php';
 		?>
 		<div id="section">
+			<i>Browse</i><br/><br/>
 			<?php
 				include 'scripts/database/browseSongs.php';
 			?>
