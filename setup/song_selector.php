@@ -32,7 +32,7 @@ if (mysqli_connect_errno ())
 
 // We assume all songs are available until they are
 // determined to be blocked through the SQL query.
-for ($i = 0; $i < 15; $i++)
+for ($i = 1; $i <= 15; $i++)
 {
 	$available[$i] = true;
 }
@@ -59,7 +59,7 @@ while ($row = mysqli_fetch_row ($result))
 // (If this needs expanding upon, please clean this up!)
 
 // Every song starts with a multiplier of 1.
-for ($i = 0; $i < 15; $i++)
+for ($i = 1; $i <= 15; $i++)
 {
 	$multiplier[$i] = 1;
 }
@@ -110,7 +110,7 @@ while ($row = mysqli_fetch_row ($result))
 // Songs with higher rank are given more tickets.
 
 $ticket = [];
-for ($i = 1; $i < 15; $i++)
+for ($i = 1; $i <= 15; $i++)
 {
 	if ($available[$i])
 	{
