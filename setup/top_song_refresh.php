@@ -26,7 +26,8 @@ if (mysqli_connect_errno ())
 // --------------------------------------------------------
 // STEP 1: FETCH THE CURRENT TOP 10 LIST
 // Reset the list.
-for ($i = 1; $i <= 15; $i++)
+// CODE DOESN'T WORK AND IS NO LONGER NECESSARY
+/*for ($i = 1; $i <= 15; $i++)
 {
 	$rating[$i] = 0;
 }
@@ -43,15 +44,12 @@ while ($row = mysqli_fetch_row ($result))
 	$rating[$row["rank"]] = $row[""];
 }
 print("OLD\n");
-print_r($rating);
+print_r($rating);*/
 
 // --------------------------------------------------------
 // STEP 2: TEST BY RANDOMIZING THIS STUFF
-for ($i = 1; $i <= 15; $i++)
-{
-	$rating[$i] = 0;
-}
-for ($i = 1; $i <= 10; $i++)
+
+/*for ($i = 1; $i <= 10; $i++)
 {
 	$x = rand (1, 15);
 	while ($rating[$x] != 0)
@@ -59,14 +57,65 @@ for ($i = 1; $i <= 10; $i++)
 		$x = rand (1, 15);
 	}
 	$rating[$x] = $i;
+}*/
+
+// --------------------------------------------------------
+// STEP 1: CHANGE THE RATINGS BY THE STARS
+// 3 stars does not affect star value.
+// Less stars decreases and more increases star value.
+// The highest star value song gets the highest rating.
+// This is repeated until the top 10 are chosen.
+
+// Initialize the ratings to zero.
+for ($song = 1; $song <= 15; $song++)
+{
+	$rating[$song] = 0;
 }
 
-// --------------------------------------------------------
-// STEP 3: ???
+// Set the "star values."
+for ($song = 1; $song <= 15; $song++)
+{
+	// Initialize the star values to zero.
+	$star_value[$song] = 0;
+	// Get list of star ratings.
+	$query = "
+	SELECT stars
+	FROM RATING
+	WHERE song=".$song.";";
+	$result = mysqli_query ($connection, $query);
+	// Modify star value based on ratings.
+	while ($row = mysqli_fetch_row ($result))
+	{
+		$star_value[$song] += $row[0] - 3;
+	}
+}
+print_r($star_value);
+
+// Set the top songs using the star values.
+for ($top = 1; $top <= 10; $top++)
+{
+	$max = max ($star_value);
+	$min = min ($star_value);
+		// Search star values for max value.
+	$found = false;
+	for ($song = 1; $song <= 15 && !$found; $song++)
+	{
+		if ($star_value[$song] == $max)
+		{
+			$rating[$song] = $top;
+			// Stop searching.
+			$found = true;
+			// Prevent song from reappearing in top 10.
+			$star_value[$song] = $min - 1;
+		}
+	}
+}
+print_r($rating);
 
 // --------------------------------------------------------
-// STEP 4: UPDATE THE LIST IN THE DATABASE
+// STEP 2: UPDATE THE LIST IN THE DATABASE
 // Convert 0's to NULL.
+
 for ($i = 1; $i <= 15; $i++)
 {
 	$query = "
@@ -75,8 +124,6 @@ for ($i = 1; $i <= 15; $i++)
 	WHERE id=".$i.";";
 	$result = mysqli_query ($connection, $query);
 }
-print("OLD\n");
-print_r($rating);
 
 // Close the database connection.
 mysqli_close ($connection);
