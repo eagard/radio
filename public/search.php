@@ -48,7 +48,6 @@
 									echo "<th>" . "Title" . "</th>";
 									echo "<th>" . "Composer" . "</th>";
 									echo "<th>" . "Performer" . "</th>";
-									echo "<th style='width:164px;'>" . "User Rating" . "</th>";
 									echo "<th style='text-align:center;margin-left:auto;margin-right:auto;'>" . "Source" . "</th>";
 									echo "</tr>";
 									$count++;
@@ -57,23 +56,14 @@
 								$title = $query_row['title'];
 								$composer = $query_row['composer'];
 								$performer = $query_row['performer'];
-								$stars = 3;
 								$source = $query_row['source'];
 
 								echo "<tr>";
 								echo "<td>" . $title . "</td>";
 								echo "<td>" . $composer . "</td>";
 								echo "<td>" . $performer . "</td>";
-								echo "<td>";
-								for ($i = 0; $i < 5; $i++) {
-									if ($i < $stars) {
-										echo "<img src='images/star_full.png' alt='x'/>";
-									}
-									else {
-										echo "<img src='images/star_empty.png' alt='o'/>";
-									}
-								}
-								echo "</td>";
+								// eric:  removed stars because of issues
+								// not same format as other tables
 								echo "<td style='text-align:center;'>";
 								echo "<a href=";
 								echo "http://" . $source; 

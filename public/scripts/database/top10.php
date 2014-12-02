@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include 'updateStars.php'; ?>
 
 <form action='top10.php'>
 <table>
