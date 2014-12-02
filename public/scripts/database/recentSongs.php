@@ -20,9 +20,9 @@
 $query = "
 SELECT *
 FROM RECENT_SONG INNER JOIN SONG ON RECENT_SONG.song=SONG.id
+WHERE RECENT_SONG.id+25 > (SELECT MAX(id) FROM RECENT_SONG)
 ORDER BY RECENT_SONG.time_played DESC
 ";
-
 if($query_run = mysql_query($query)) {
 	while($query_row = mysql_fetch_assoc($query_run)) {
 		$time_played = $query_row['time_played'];

@@ -5,7 +5,12 @@
 		<div id="logInOut">
 	
 			<?php
-
+			$localconfig = parse_ini_file ("../localconfig.ini", true);
+			if (ISSET($localconfig["URL"]["stream"]))
+			{
+				$radioURL = $localconfig["URL"]["stream"];
+				echo "<a href='".$radioURL."'>Listen Now!</a><br/>";
+			}
 			if(loggedIn() === true) {
 				echo "<i>";
 				echo $_SESSION['username'];
