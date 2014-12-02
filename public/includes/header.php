@@ -9,7 +9,8 @@
 			if (ISSET($localconfig["URL"]["stream"]))
 			{
 				$radioURL = $localconfig["URL"]["stream"];
-				echo "<a href='".$radioURL."'>Listen Now!</a><br/>";
+				echo "<a href='".$radioURL."' target='_blank'>
+						Listen Now!</a><br/>";
 			}
 			if(loggedIn() === true) {
 				echo "<i>";
